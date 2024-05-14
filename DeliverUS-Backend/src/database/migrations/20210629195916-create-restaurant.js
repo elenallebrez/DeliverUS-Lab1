@@ -14,8 +14,7 @@ module.exports = {
 
       },
       description:{
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
 
       },
       address:{
@@ -29,7 +28,6 @@ module.exports = {
 
       },
       url:{
-        allowNull: false,
         type: Sequelize.STRING
 
       },
@@ -44,18 +42,20 @@ module.exports = {
       },
       shippingCosts:{
         allowNull: false,
+        defaultValue: 0.0,
+        type: Sequelize.DOUBLE
+      },
+      averageServiceMinutes:{
+        allowNull: true,
         type: Sequelize.DOUBLE
       },
       email:{
-        allowNull: false,
         type: Sequelize.STRING
       },
       logo:{
-        allowNull: false,
         type: Sequelize.STRING
       },
       phone:{
-        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt:{
@@ -70,10 +70,16 @@ module.exports = {
       },
       userId:{
         allowNull: false,
-
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: {
+            tableName: 'Users'
+          },
+          key: 'id'
+        }
       },
       heroImage:{
-        allowNull: false,
         type: Sequelize.STRING
       },
       status:{
@@ -85,6 +91,7 @@ module.exports = {
           'closed',
           'temporarily closed'
         ],
+        default: 'offline'
       },
     })
   },
